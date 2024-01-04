@@ -25,3 +25,10 @@
 ### Repository 
 - Nơi tương tác với các dữ liệu của thực thể
 - Được sử dụng để lấy dữ liệu và tương tác với dữ liệu của table (create, read, update, delete)
+
+
+# RULESET
+- Mỗi lần push code lên project cần tạo 1 pull request và set reviewer cho owner project
+
+
+# DOC: https://drive.google.com/drive/folders/1p1jBQ0WXVluZbx92vvBFwGFO9kM5cXkz?usp=drive_link
