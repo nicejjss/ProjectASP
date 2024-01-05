@@ -24,7 +24,7 @@
 # RULESET
  ## Push code và tạo merge request
    - Check-out branch development rồi tạo branch có tên feature/tên_task nếu là chức năng, fix/tên_bug nếu là lỗi 
-         VD: feature/create_layout_main , fix/button_submit_incorrect
+         VD: feature/create_layout_main
    - Mỗi lần push code lên project cần tạo 1 pull request và set reviewer cho owner project
 
  ## Viết Script SQL trong folder SQL:
