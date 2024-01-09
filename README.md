@@ -1,4 +1,4 @@
-# Web bán hàng sử dụng SAP.NET 6 MVC
+# Web bán hàng sử dụng ASP.NET 6 MVC
 - Luồng sử lý dữ liệu cơ bản: User->Routeing->Controller<->Model->View->User
 
 ## Thành phần chính
