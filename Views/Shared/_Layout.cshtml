@@ -7,10 +7,54 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Project.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="div_header">
+            <button class="logo"><img src="/asset/logo.jpg" style="width:200px;height:62px;" /></button>
+            <div class="all_menu">
+                <div style="display:flex;flex-direction:row; align-items:center;justify-content:center;">
+                    <i class="bi bi-list" style="font-size: 25px;"></i>
+                    <button class="all_menu_button">All</button>
+                </div>
+                <div class="dropdown_menu">
+                    <a href="#">Aaaaaaaa</a>
+                    <a href="#">Bbbbbbb</a>
+                    <a href="#">Cccc</a>
+                    <a href="#">Ddddddddd</a>
+                    <a href="#">Ereeeeee</a>
+                    <a href="#">Ffffff</a>
+                </div>
+            </div>
+            <div class="search_header">
+                <input class="search_input" type="text" placeholder="abc abc abc" style="display:flex; flex:1"/>
+            </div>
+            <div>
+                <div class="div_sub_button_search">
+                    <i class="bi bi-search"></i>
+                    <button class="button_search">Search</button>
+                </div>
+            </div>
+            <div class="div_end_header">
+               <button class="div_cart">
+                    <i class="bi bi-cart-fill" style="font-size: 25px;"></i>
+                </button>
+                <div class="line"></div>
+                <div class="div_contact">
+                    <button class="div_cart">
+                        <i class="bi bi-telephone-fill" style="font-size: 25px;"></i>
+                    </button>
+                        <p class="contact">0372682771</p>
+                </div>
+            </div>
+        </div>
+        <div>
+
+        </div>
+       @*  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Project</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -28,7 +72,7 @@
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav> *@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
