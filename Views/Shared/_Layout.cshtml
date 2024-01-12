@@ -4,87 +4,195 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Project</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Project.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
 </head>
 <body>
-    <header>
-        <div class="div_header">
-            <button class="logo"><img src="/asset/logo.jpg" style="width:200px;height:62px;" /></button>
-            <div class="all_menu">
-                <div style="display:flex;flex-direction:row; align-items:center;justify-content:center;">
-                    <i class="bi bi-list" style="font-size: 25px;"></i>
-                    <button class="all_menu_button">All</button>
+    <div id="wrapper">
+        <header>
+            <div class="div_header">
+                <button class="logo"><img src="/asset/logo.jpg" style="width:200px;height:62px;" /></button>
+                <div class="all_menu">
+                    <div style="display:flex;flex-direction:row; align-items:center;justify-content:center;">
+                        <i class="bi bi-list" style="font-size: 25px;"></i>
+                        <button class="all_menu_button">All</button>
+                    </div>
+                    <div class="dropdown_menu">
+                        <a href="#">Aaaaaaaa</a>
+                        <a href="#">Bbbbbbb</a>
+                        <a href="#">Cccc</a>
+                        <a href="#">Ddddddddd</a>
+                        <a href="#">Ereeeeee</a>
+                        <a href="#">Ffffff</a>
+                    </div>
                 </div>
-                <div class="dropdown_menu">
-                    <a href="#">Aaaaaaaa</a>
-                    <a href="#">Bbbbbbb</a>
-                    <a href="#">Cccc</a>
-                    <a href="#">Ddddddddd</a>
-                    <a href="#">Ereeeeee</a>
-                    <a href="#">Ffffff</a>
+                <div class="search_header">
+                    <input class="search_input" type="text" placeholder="abc abc abc" style="display:flex; flex:1" />
                 </div>
-            </div>
-            <div class="search_header">
-                <input class="search_input" type="text" placeholder="abc abc abc" style="display:flex; flex:1"/>
+                <div>
+                    <div class="div_sub_button_search">
+                        <i class="bi bi-search"></i>
+                        <button class="button_search">Search</button>
+                    </div>
+                </div>
+                <div class="div_end_header">
+                    <button class="div_cart">
+                        <i class="bi bi-cart-fill" style="font-size: 25px;"></i>
+                    </button>
+                    <div class="line"></div>
+                    <div class="div_contact">
+                        <button class="div_cart">
+                            <i class="bi bi-telephone-fill" style="font-size: 25px;"></i>
+                        </button>
+                        <p class="contact">0372682771</p>
+                    </div>
+                </div>
             </div>
             <div>
-                <div class="div_sub_button_search">
-                    <i class="bi bi-search"></i>
-                    <button class="button_search">Search</button>
-                </div>
             </div>
-            <div class="div_end_header">
-               <button class="div_cart">
-                    <i class="bi bi-cart-fill" style="font-size: 25px;"></i>
-                </button>
-                <div class="line"></div>
-                <div class="div_contact">
-                    <button class="div_cart">
-                        <i class="bi bi-telephone-fill" style="font-size: 25px;"></i>
-                    </button>
-                        <p class="contact">0372682771</p>
-                </div>
-            </div>
-        </div>
-        <div>
-
-        </div>
-       @*  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            @*  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Project</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Project</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </li>
+            </ul>
+            </div>
+            </div>
+            </nav> *@
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        <footer class="border-top footer text-muted">
+            <div class="container-policy">
+                <div class="verify">
+                    <a class="img-verify" asp-controller="Home" asp-action="Index">
+                        <img src="~/asset/verify.png" />
+                    </a>
+                    <div class="text-verify">
+                        <a asp-controller="Home" asp-action="Index">
+                            Chính hãng
+                        </a>
+                        <a asp-controller="Home" asp-action="Index">
+                            Sản phẩm hính hãng
+                        </a>
+                    </div>
+                </div>
+
+                <div class="truck">
+                    <a class="img-truck" asp-controller="Home" asp-action="Index">
+                        <img src="~/asset/truck.png" />
+                    </a>
+                    <div class="text-truck">
+                        <a asp-controller="Home" asp-action="Index">
+                            63 tỉnh thành
+                        </a>
+                        <a asp-controller="Home" asp-action="Index">
+                            Giao hàng tận nơi
+                        </a>
+                    </div>
+                </div>
+
+                <div class="warranty">
+                    <a class="img-box" asp-controller="Home" asp-action="Index">
+                        <img src="~/asset/box.png" />
+                    </a>
+                    <div class="text-warranty">
+                        <a asp-controller="Home" asp-action="Index">
+                            Bảo hành
+                        </a>
+                        <a asp-controller="Home" asp-action="Index">
+                            Bảo hành dài hạn
+                        </a>
+                    </div>
+                </div>
+
+                <div class="instruction">
+                    <a class="img-instruction" asp-controller="Home" asp-action="Index">
+                        <img src="~/asset/info-round-button.png" />
+                    </a>
+                    <div class="text-instruction">
+                        <a asp-controller="Home" asp-action="Index">
+                            Hướng dẫn
+                        </a>
+                        <a asp-controller="Home" asp-action="Index">
+                            Mua hàng online
+                        </a>
+                    </div>
                 </div>
             </div>
-        </nav> *@
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - Project - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+            <div class="container-contact">
+                <ul class="introduce">
+                    <li>MONA VietNam</li>
+                    <li><a>Giới thiệu</a></li>
+                    <li><a>Khách hàng thân thiết</a></li>
+                    <li><a>Chính sách bảo hành</a></li>
+                    <li><a>Hướng dẫn mua hàng</a></li>
+                </ul>
+
+                <ul class="container-contact">
+                    <li>Liên hệ</li>
+                    <li><span>Gọi điện mua hàng: </span><a>1900 123 456</a> <span>(8h-22h)</span></li>
+                    <li><span>Gọi điện khiếu nại: </span><a>1900 123 456</a> <span>(8h-22h)</span></li>
+                    <li><span>Gọi điện trả hàng: </span><a>1900 123 456</a> <span>(8h-22h)</span></li>
+                    <li><span>Gọi điện bảo hành: </span><a>1900 123 456</a> <span>(8h-22h)</span></li>
+                </ul>
+
+                <ul class="system">
+                    <li>Hệ thống SHOWROOM</li>
+                    <li>Chi nhánh 1: Lý Thường Kiệt</li>
+                    <li>Chi nhánh 2: Nguyễn Thị Minh Khai</li>
+                    <li>Chi nhánh 3: Cách Mạng Tháng 8</li>
+                    <li>Chi nhánh 4: Võ Văn Tần</li>
+                </ul>
+
+                <div class="certified">
+                    <img src="~/asset/20150827110756-dathongbao.png" />
+                    <img src="~/asset/social.png" />
+                </div>
+            </div>
+
+
+
+            <div class="container-copy">
+                <ul>
+                    <li>Bản quyền © 2017 bởi ESMART VIET NAM</li>
+                    <li>
+                        Công ty Cổ Phần ESMART Việt Nam Giấy phép kinh doanh số 0107875xxx do sở kế hoạch và đầu tư thành phố Hồ Chí Minh cấp ngày 06/06/2018
+                    </li>
+                    <li>
+                        Văn phòng HN: 96 Định Công, Hoàng Mai, Hà Nội
+                    </li>
+                    <li>
+                        Hotline :1900 123 456 | Email: smart@smart.media
+                    </li>
+                </ul>
+                    
+               
+                &copy; 2024 - Project - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+
+    </div>
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
