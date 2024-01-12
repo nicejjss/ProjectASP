@@ -14,7 +14,8 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background: #ededed;
 }
 
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
@@ -28,7 +29,7 @@ for details on configuring this project to bundle and minify static web assets. 
 /*================================WRAPPER================================*/
 #wrapper {
     margin: 0 auto;
-    width: 1800px;
+    width: 1290px;
 }
 /*================================HEADER================================*/
 
@@ -220,21 +221,134 @@ button.accept-policy {
 
 /*================================FOOTER================================*/
 .footer {
+    font-size : 15px;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
-    line-height: 60px;
     text-decoration: none;
+    background : white;
 }
 
 .container-policy {
     display: flex;
     justify-content: space-around;
+    width :100%;
+    padding : 20px;
 }
 
-    .container-policy .verify {
+    .container-policy .verify{
         display: flex;
     }
+
+        .container-policy .verify .text-verify {
+            display: flex;
+            flex-direction : column;
+        }
+
+    .container-policy .truck {
+        display: flex;
+    }
+
+        .container-policy .truck .text-truck {
+            display: flex;
+            flex-direction: column;
+        }
+
+
+    .container-policy .warranty {
+        display: flex;
+    }
+
+        .container-policy .warranty .text-warranty {
+            display: flex;
+            flex-direction: column;
+        }
+
+    .container-policy .instruction {
+        display: flex;
+    }
+
+        .container-policy .instruction .text-instruction {
+            display: flex;
+            flex-direction: column;
+        }
+
+.container-policy a {
+    color: #818181;
+}
+
+.container-policy a:first-child {
+    color :black;
+    font-weight : bold;
+    margin-bottom: 5px;
+}
+
+.container-policy img {
+    max-height : 65px;
+    max-width : 65px;
+    padding : 15px;
+}
+
+.container-ICSC {
+    display: flex;
+    width : 100%;
+    background : #f8f8f8;
+    justify-content : space-around;
+    padding : 15px;
+}
+
+    .container-ICSC ul li {
+        margin-bottom : 10px;
+    }
+
+    .container-ICSC ul li:first-child {
+        text-transform : uppercase;
+        color : #0d0d0d;
+        font-weight : bold;
+
+    }
+
+    .container-ICSC .certified span {
+        text-transform: uppercase;
+        color: #0d0d0d;
+        font-weight: bold;
+    }
+
+
+.container-ICSC .certified {
+    display: flex;
+    flex-direction: column;
+}
+    .container-ICSC .certified img {
+        width : 150px;
+    }
+
+.container-copy ul {
+    display:flex;
+    flex-direction :column;
+    width : 100%;
+    padding : 25px;
+    margin-left : 60px;
+}
+
+.container-copy ul li {
+    margin-bottom: 15px;
+}
+
+.copy {
+    color: #818181;
+    background: black;
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding : 15px;
+}
+
+
+
+
+
+
 
 
 
