@@ -29,7 +29,7 @@ for details on configuring this project to bundle and minify static web assets. 
 /*================================WRAPPER================================*/
 #wrapper {
     margin: 0 auto;
-    width: 1290px;
+    max-width: 1290px;
 }
 /*================================HEADER================================*/
 
@@ -116,18 +116,17 @@ button.accept-policy {
     box-shadow: 0px 8px 16px 0px rgb(165, 156, 156, 0.00);
     z-index: 1;
 }
-
-    .dropdown_menu a {
+.dropdown_menu a {
         color: black;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
-    }
+}
 
-        .dropdown_menu a:hover {
-            background-color: #0000;
-            color: #fff;
-        }
+    .dropdown_menu a:hover {
+        background-color: #e6f748;
+        /*color: white;*/
+    }
 
 .all_menu:hover .dropdown_menu {
     display: block;
@@ -162,9 +161,24 @@ button.accept-policy {
     justify-content: center;
     align-items: center;
     margin-right: 16px;
+    align-content: center;
+    border: 1px solid #e6f748;
+}
+
+.div_sub_button_search div {
+    display: flex;  
+    flex: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#icon_search {
+    margin-left: 8px;
 }
 
 .search_input {
+    flex:1;
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
     border: 1px solid #e6f748;
@@ -175,7 +189,8 @@ button.accept-policy {
     background-color: #e6f748;
     border: none;
     border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
+    border-bottom-right-radius: 6px;    
+    margin-
 }
 
 .div_end_header {
@@ -218,15 +233,41 @@ button.accept-policy {
     padding: 16px 0px 0px 0px;
 }
 
+#nav_container {
+    background-color: #e6f748;
+    height: 60px
+}
 
+#div_container {
+    /*flex: 1;*/
+    /*background-color: #e6f748;*/
+}
+
+#div_container ul {
+    justify-content: center;
+}
+
+#div_container ul li {
+    height: 60px;
+    margin: 0 8px 0 8px;
+}
+
+#div_container ul li:hover {
+    background-color: #e6f748;
+
+}
+
+#div_container ul li a {
+    text-align: center;
+}
 /*================================FOOTER================================*/
 .footer {
-    font-size : 15px;
+    font-size: 15px;
     bottom: 0;
     width: 100%;
     white-space: nowrap;
     text-decoration: none;
-    background : white;
+    background: white;
 }
 
 .container-policy {
