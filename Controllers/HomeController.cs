@@ -11,12 +11,17 @@ namespace Project.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly DatabaseContext _context;
         private readonly IHttpContextAccessor _accessor;
+        private readonly IHomeResponsitory _homeResponsitoty;
 
-        public HomeController(ILogger<HomeController> logger, DatabaseContext context, IHttpContextAccessor accessor)
+        public HomeController(ILogger<HomeController> logger, 
+        DatabaseContext context, 
+        IHttpContextAccessor accessor,
+        IHomeResponsitory homeResponsitory)
         {
             _logger = logger;
             _context = context;
             _accessor = accessor;
+            _homeResponsitoty = homeResponsitory;
         }
 
         public IActionResult Index(int currentPage = 1, int categoryId = 1)
@@ -25,12 +30,12 @@ namespace Project.Controllers
             _accessor?.HttpContext?.Session.SetString("UserName", "Công Đặng");
             _accessor?.HttpContext?.Session.SetInt32("UserID", 1);
 
-            IEnumerable<Product> products = _context.DisplayProducts(categoryId).ToList();
+            IEnumerable<Product> products = _homeResponsitoty.GetProducts().ToList();
             int totalRecord = products.Count();
             int pageSize = 3;
             int totalPage = (int) Math.Ceiling(totalRecord / (double) pageSize);
             products = products.Skip((currentPage - 1) * pageSize).Take(pageSize);
-            IEnumerable<Category> categories = _context.DisplayCategories().ToList();
+            IEnumerable<Category> categories = _homeResponsitoty.GetCategories().ToList();
             ProductViewModel model = new ProductViewModel {
                 Products = products,
                 Categories = categories,

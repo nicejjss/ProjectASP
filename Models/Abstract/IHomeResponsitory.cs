@@ -7,4 +7,5 @@ using System.Collections;
 public interface IHomeResponsitory {
     IEnumerable<Product> GetProducts();
     IEnumerable<Category> GetCategories();
+    IEnumerable<Product> DisplayProductsPagination (int pageSize, int pageNumber);
 }
