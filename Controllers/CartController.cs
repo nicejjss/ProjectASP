@@ -6,28 +6,41 @@ using Project.Models;
 public class CartController : Controller {
     private readonly IHttpContextAccessor _accessor;
     private readonly DatabaseContext _context;
-    public CartController(IHttpContextAccessor accessor, DatabaseContext context)
+    private readonly ICartReponsitoty _cartResponsitory;
+    public CartController(IHttpContextAccessor accessor, DatabaseContext context, ICartReponsitoty cartReponsitoty)
     {
         _accessor = accessor;
         _context = context;
+        _cartResponsitory = cartReponsitoty;
     }
 
     public IActionResult Index() {
         // Fix cứng dữ liệu
         _accessor?.HttpContext?.Session.SetInt32("UserID", 1);
 
+        // Them comment
         var userID = _accessor?.HttpContext?.Session.GetInt32("UserID");
-        SqlParameter userIDParam = new SqlParameter("@PK_iUserID", userID);
-        IEnumerable<CartDetail> carts = _context.CartDetails.FromSqlRaw("sp_GetInfoCart @PK_iUserID", userIDParam);
+        IEnumerable<CartDetail> carts = _cartResponsitory.getCartInfo(Convert.ToInt32(userID)).ToList();
         int cartCount = carts.Count();
         _accessor?.HttpContext?.Session.SetInt32("CartCount", cartCount);
         
         return View(carts);
     }
 
-    // [Route("/Cart/AddToCart/{productID?}/{unitPrice?}/{quantity?}")]
-    // [HttpGet("/Cart/AddToCart/{productID?}/{unitPrice?}/{quantity?}")]
     [HttpPost]
+    public IActionResult GetCartInfo() {
+        var userID = _accessor?.HttpContext?.Session.GetInt32("UserID");
+        SqlParameter userIDParam = new SqlParameter("@PK_iUserID", userID);
+        IEnumerable<CartDetail> carts = _context.CartDetails.FromSqlRaw("sp_GetInfoCart @PK_iUserID", userIDParam);
+        CartViewModel model = new CartViewModel {
+            Carts = carts,
+            CartCount = carts.Count()
+        };
+        return Json(model);
+    }
+
+    [Route("/Cart/AddToCart/{productID?}/{unitPrice?}/{quantity?}")]
+    [HttpGet("/Cart/AddToCart/{productID?}/{unitPrice?}/{quantity?}")]
     public IActionResult AddToCart(int productID, double unitPrice, int quantity)
     {
         var sessionUserID = _accessor?.HttpContext?.Session.GetInt32("UserID");
@@ -45,7 +58,7 @@ public class CartController : Controller {
             SqlParameter updateTimeParam = new SqlParameter("@dUpdateTime", DateTime.Now.ToString("dd/MM/yyyy"));
             List<Cart> cart = _context.Carts.FromSqlRaw("SET DATEFORMAT dmy EXEC sp_GetCartIDByTime @dUpdateTime", updateTimeParam).ToList();
             int cartID;
-            if (cart.Count() != 0) {
+            if (cart != null) {
                 cartID = cart[0].PK_iCartID;
                 var updateTime = cart[0].dUpdateTime;
             } else {
@@ -60,15 +73,8 @@ public class CartController : Controller {
             SqlParameter unitPriceParam = new SqlParameter("@dUnitPrice", unitPrice);
             SqlParameter discountParam = new SqlParameter("@dDiscount", 1);
             SqlParameter moneyParam = new SqlParameter("@dMonney", unitPrice * quantity);
-            // Kiểm tra mã sản phẩm trong giỏ hàng có trùng với mã sản phầm cần thêm vào giỏ hàng hay không?
-            string msg;
-            List<CartDetail> product = _context.CartDetails.FromSqlRaw("EXEC sp_CheckProductInCartDetail @PK_iUserID, @PK_iProductID", userIDParam, productIDParam).ToList();
-            if (product.Count() > 0) {
-                msg = "Sản phẩm này đã có trong giỏ hàng";
-            } else {
-                _context.Database.ExecuteSqlRaw("sp_InsertProductIntoCartDetail @PK_iUserID, @PK_iProductID, @PK_iCartID, @iQuantity, @dUnitPrice, @dDiscount, @dMonney", userIDParam, productIDParam, cartIDParam, quantityParam, unitPriceParam, discountParam, moneyParam);
-                msg = "Thêm vào giỏ hàng thành công!";
-            }
+            _context.Database.ExecuteSqlRaw("sp_InsertProductIntoCartDetail @PK_iUserID, @PK_iProductID, @PK_iCartID, @iQuantity, @dUnitPrice, @dDiscount, @dMonney", userIDParam, productIDParam, cartIDParam, quantityParam, unitPriceParam, discountParam, moneyParam);
+            string msg = "Thêm vào giỏ hàng thành công!";
             return Json(new {msg});
         }
     }

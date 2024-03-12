@@ -10,17 +10,22 @@ public class HomeResponsitory : IHomeResponsitory
     {
         _context = context;
     }
-    public IEnumerable<Product> GetProducts() {
+    public IEnumerable<Product> getProducts() {
         return _context.Products.FromSqlRaw("EXEC sp_SelectProducts").ToList();
     }
-    public IEnumerable<Category> GetCategories() { 
+    public IEnumerable<Category> getCategories() { 
         return _context.Categories.FromSqlRaw("EXEC sp_SelectCategories").ToList();
     }
 
-    public IEnumerable<Product> DisplayProductsPagination(int pageSize, int pageNumber)
+    public IEnumerable<Product> displayProductsPagination(int pageSize, int pageNumber)
     {
         SqlParameter pageSizeParam = new SqlParameter("@PageSize", pageSize);
         SqlParameter pageNumberParam = new SqlParameter("@PageNumber", pageNumber);
         return _context.Products.FromSqlRaw("EXEC sp_PaginationProducts @PageSize, @PageNumber", pageSizeParam, pageNumberParam);
+    }
+
+    public IEnumerable<Category> searchProductsByKeyword(string keyword) {
+        SqlParameter keywordParam = new SqlParameter("@sKeyword", keyword);
+        return _context.Categories.FromSqlRaw("EXEC sp_SearchCategoryByKeyword @sKeyword", keywordParam);
     }
 }
