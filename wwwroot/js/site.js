@@ -19,7 +19,7 @@ window.onclick = (event) => {
     }
 }
 
-// Tìm kiếm sản phẩm
+// Tìm kiếm danh mục
 function searchProducts(input) {
     document.querySelector('.header__search-history').style.display = 'block';
     var formData = new FormData();
@@ -50,29 +50,19 @@ window.onclick = (event) => {
     }
 }
 
-// load số lượng sản phẩm giỏ hàng
+// lấy số lượng sản phẩm giỏ hàng
 function getCartInfo() {
     var xhr = new XMLHttpRequest();
     xhr.open('post', '/Cart/GetCartInfo', true);
     xhr.onreadystatechange = () => {
         if (xhr.readyState == 4 && xhr.status == 200) {
             const data = JSON.parse(xhr.responseText);
-            // getCartCount(data);
+            console.table(data);
         }
     }
     xhr.send(null);
 }
-
-//Lấy thông tin sản phẩm trong giỏ hàng
-
-function getCartCount(data) {
-    let html = "";
-    console.log(data);
-    console.log(document.querySelector(".navbar__cart-notice").innerText);
-    for (let i = 0; i < data.length; i++) {
-        document.querySelector(".navbar__cart-notice").innerText = data[0].cartCount
-    }
-}
+//getCartInfo();
 
 // Tăng, giảm số lượng sản phẩm
 function cong(event, productID, unitPrice) {
@@ -150,17 +140,23 @@ function reduceProduct(event) {
 function addToCart(productID, price) {
     var quantity = document.getElementById("qnt").value;
     if (parseInt(quantity) == 0) {
-        alert('Bạn chưa nhập số lượng sản phẩm!');
+        toast({title: "Thông báo", msg: "Bạn chưa nhập số lượng sản phẩm!", type: "success", duration: 5000});
+        // alert('Bạn chưa nhập số lượng sản phẩm!');
     } else {
+        var formData = new FormData();
+        formData.append('productID', productID);
+        formData.append('unitPrice', price);
+        formData.append('quantity', quantity);
         var xhr = new XMLHttpRequest();
-        xhr.open('get', '/Cart/AddToCart/' + productID + '/' + price + '/' + quantity + '', true);
+        xhr.open('post', '/Cart/AddToCart', true);
         xhr.onreadystatechange = () => {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 const obj = JSON.parse(xhr.responseText);
-                alert(obj.msg);
+                toast({title: "Thông báo", msg: `${obj.msg}`, type: "success", duration: 5000});
+                //alert(obj.msg);
             }
         }
-        xhr.send(null);
+        xhr.send(formData);
     }
 }
 
@@ -194,4 +190,61 @@ function checkout() {
         }
     };
     xhr.send(null);
+}
+
+// Sắp xếp các sản phẩm trong trang sản phẩm theo giá tăng dần
+function sortIncre(categoryID) {
+    var formData = new FormData();
+    formData.append("categoryID", categoryID);
+    var xhr = new XMLHttpRequest();
+    xhr.open('post', '/Product/Sort', true);
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            const data = JSON.parse(xhr.responseText);
+            console.log(data);
+            let html = "";
+            html += data.products.map(obj => `
+            <div class="col l-2-4 c-6 m-4">
+                <a class="home-product-item" href="/Product/Detail/${obj.pK_iProductID}">
+                    <div class="home-product-item__img"
+                        style="background-image: url(/img/${obj.sImageUrl});"></div>
+                    <h4 class="home-product-item__name">${obj.sProductName}</h4>
+                    <div class="home-product-item__price">
+                        <span class="home-product-item__price-old">1.200 000đ</span>
+                        <span class="home-product-item__price-current">${obj.dPrice} đ</span>
+                    </div>
+                    <div class="home-product-item__action">
+                        <span class="home-product-item__like home-product-item__like--liked">
+                            <i class="home-product-item__like-icon-empty far fa-heart"></i>
+                            <i class="home-product-item__like-icon-fill fas fa-heart"></i>
+                        </span>
+                        <div class="home-product-item__rating">
+                            <i class="home-product-item__star--gold fas fa-star"></i>
+                            <i class="home-product-item__star--gold fas fa-star"></i>
+                            <i class="home-product-item__star--gold fas fa-star"></i>
+                            <i class="home-product-item__star--gold fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="home-product-item__sold"> 88 Đã bán</span>
+                    </div>
+                    <div class="home-product-item__origin">
+                        <span class="home-product-item__brand">Who</span>
+                        <span class="home-product-item__origin-name">Nhật Bản</span>
+                    </div>
+                    <div class="home-product-item__favourite">
+                        <i class="fas fa-check"></i>
+                        <span>Yêu thích</span>
+                    </div>
+                    <div class="home-product-item__sale-off">
+                        <span class="home-product-item__sale-off-percent">53%</span>
+                        <span class="home-product-item__sale-off-label">GIẢM</span>
+                    </div>
+                </a>
+            </div>
+            `).join('');
+            console.log(document.querySelector(".product__container").innerHTML = html);
+            document.querySelector(".product__container").innerHTML = html;
+        }
+    }
+    xhr.send(formData);
 }

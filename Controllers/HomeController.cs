@@ -12,9 +12,9 @@ namespace Project.Controllers
         private readonly DatabaseContext _context;
         private readonly IHttpContextAccessor _accessor;
         private readonly IHomeResponsitory _homeResponsitory;
-        private readonly ICartReponsitoty _cartResponsitory;
+        private readonly ICartReponsitory _cartResponsitory;
 
-        public HomeController(ILogger<HomeController> logger, DatabaseContext context, IHttpContextAccessor accessor, IHomeResponsitory homeResponsitory, ICartReponsitoty cartReponsitory)
+        public HomeController(ILogger<HomeController> logger, DatabaseContext context, IHttpContextAccessor accessor, IHomeResponsitory homeResponsitory, ICartReponsitory cartReponsitory)
         {
             _logger = logger;
             _context = context;
@@ -26,13 +26,13 @@ namespace Project.Controllers
         public IActionResult Index(int currentPage = 1)
         {
             // Fix cứng dữ liệu
-            // _accessor?.HttpContext?.Session.SetString("UserName", "Công Đặng");
-            //_accessor?.HttpContext?.Session.SetInt32("UserID", 1);
+             _accessor?.HttpContext?.Session.SetString("UserName", "Công Đặng");
+            _accessor?.HttpContext?.Session.SetInt32("UserID", 1);
             var userID = _accessor?.HttpContext?.Session.GetInt32("UserID");
 
             IEnumerable<Product> products = _homeResponsitory.getProducts().ToList();
             int totalRecord = products.Count();
-            int pageSize = 6;
+            int pageSize = 12;
             int totalPage = (int) Math.Ceiling(totalRecord / (double) pageSize);
             products = products.Skip((currentPage - 1) * pageSize).Take(pageSize);
             IEnumerable<Category> categories = _homeResponsitory.getCategories().ToList();
@@ -43,7 +43,8 @@ namespace Project.Controllers
                 CartDetails = cartDetails,
                 TotalPage = totalPage,
                 PageSize = pageSize,
-                CurrentPage = currentPage
+                CurrentPage = currentPage,
+                UserID = Convert.ToInt32(userID)
             };
             return View(model);
         }
